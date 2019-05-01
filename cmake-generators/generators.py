@@ -67,7 +67,9 @@ class OptionalParam():
         value_regex = re.compile(value_pattern)
 
         self.values = [match.group("value") for match in 
-                       value_regex.finditer(values_regex.search(self.parent.description).string)].append("")
+                       value_regex.finditer(values_regex.search(self.parent.description).string)]
+
+        self.values.append("")
 
 class Generator(BaseGenerator):
     """
@@ -80,14 +82,6 @@ class Generator(BaseGenerator):
 
         self.optional_params =  [OptionalParam(match.group("name"), self) for 
                                  match in OptionalParam.REGEX.finditer(self.name)]
-
-        self.variants = []
-
-        for param in self.optional_params:
-
-            for value in param.values:
-
-                self.variants.append(self.name.replace(f"[{param.name}]", value))
 
 class IDEGenerator(Generator):
     """
