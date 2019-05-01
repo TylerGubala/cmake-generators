@@ -25,25 +25,29 @@ def cmake_help() -> str:
 
     return output_bytes.decode(sys.stdout.encoding)
 
-def get_generators() -> List[str]:
+def get_generators() -> List[generators.Generator]:
     """
     Get the list of generators available according to cmake
     """
 
+    results = []
+
     generators_list = cmake_help().split("The following generators are "
                                          "available on this platform:")[-1]
 
-    for substring in generators_list.split("="):
+    generator_half_text = generators_list.split("=")
 
-        for line in substring.splitlines():
+    for i in range(len(generator_half_text)-1):
 
-            pass
+        generator_name = generator_half_text[i].split(".")[-1]
 
-    return [generator_name.string for generator_name in 
-            GENERATOR_REGEX.finditer(generators_list)]
+        generator_description = " ".join([e.strip() + "." for e in generator_half_text[i+1].split(".") if e][0:-1])
+
+        results.append(generators.get_generator(generator_name.strip(), 
+                                                generator_description.strip()))
+
+    return results
 
 if __name__ == "__main__":
 
-    for generator_name in get_generators():
-
-        print(generator_name)
+    [print(generator.name) for generator in get_generators()]
