@@ -7,7 +7,7 @@ Query cmake-generators
 from setuptools import find_packages, setup
 
 setup(name='cmake-generators',
-      version='0.0.1a',
+      version='1.0.1',
       packages=find_packages(),
       description='Query cmake-generators',
       long_description=open("./README.md", 'r').read(),
@@ -27,6 +27,6 @@ setup(name='cmake-generators',
       author='Tyler Gubala',
       author_email='gubalatyler@gmail.com',
       license='GPL-3.0',
-      python_requires=">=3.4.0,<3.7.0",
+      python_requires=">=3.4.0",
       url="https://github.com/TylerGubala/cmake-generators"
     )

@@ -1,0 +1,26 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "windows": {
+                "command": ".vscode/tasks/windows/build.bat"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "publish",
+            "type": "shell",
+            "windows": {
+                "command": ".vscode/tasks/windows/publish.bat"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

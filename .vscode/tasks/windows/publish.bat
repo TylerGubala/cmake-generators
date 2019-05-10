@@ -1,1 +1,1 @@
-venv/Scripts/twine.exe upload dist/*
+.\venv\Scripts\twine.exe upload dist/*

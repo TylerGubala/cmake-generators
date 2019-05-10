@@ -14,12 +14,6 @@ from typing import List
 
 LOGGER = logging.getLogger(__name__)
 
-# Platform specific imports
-try:
-    import winreg
-except ImportError:
-    LOGGER.info("Could not import winreg")
-
 class GeneratorTypeNotFoundError(Exception):
 
     pass
@@ -148,7 +142,7 @@ class ExtraGenerator(Generator):
 
         # Not sure how to handle this currently
 
-        raise NotImplementedError()
+        return False
 
 def get_generator(name: str, description: str) -> Generator:
     """
