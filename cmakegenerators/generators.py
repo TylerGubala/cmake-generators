@@ -62,7 +62,6 @@ class OptionalParam():
 
         self.values = [match.group("value") for match in 
                        value_regex.finditer(values_regex.search(self.parent.description).string)]
-
         self.values.append("")
 
 class Generator(BaseGenerator):
