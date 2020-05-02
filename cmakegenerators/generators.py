@@ -95,7 +95,7 @@ class Generator(BaseGenerator):
             param_permutations = [dict(zip(param_names, v)) for v in 
                                   itertools.product(*param_values)]
 
-            return [re.sub(param_replacement_regex, " ".join([param_set[param_name] for param_set in param_permutations for param_name in param_set]), self.name).strip()]
+            return [re.sub(param_replacement_regex, " ".join([param_set[param_name] for param_name in param_set]), self.name).strip() for param_set in param_permutations]
 
         else:
 
