@@ -5,6 +5,7 @@ Generator classes and functions
 """
 
 from abc import ABC, abstractmethod, abstractproperty
+import itertools
 import logging
 import re
 import subprocess
@@ -75,6 +76,30 @@ class Generator(BaseGenerator):
 
         self.optional_params =  [OptionalParam(match.group("name"), self) for 
                                  match in OptionalParam.REGEX.finditer(self.name)]
+
+    @property
+    def options(self):
+
+        if len(self.optional_params) > 0:
+
+            param_replacement_pattern = "|".join([r"\["+param.name+r"\]" for 
+                                                 param in self.optional_params])
+
+            param_replacement_regex = re.compile(param_replacement_pattern)
+
+            param_dict = {param.name: param.values for param in 
+                          self.optional_params}
+
+            param_names, param_values = zip(*param_dict.items())
+
+            param_permutations = [dict(zip(param_names, v)) for v in 
+                                  itertools.product(*param_values)]
+
+            return [re.sub(param_replacement_regex, " ".join([param_set[param_name] for param_set in param_permutations for param_name in param_set]), self.name).strip()]
+
+        else:
+
+            return [self.name]
 
 class IDEGenerator(Generator):
     """
@@ -172,4 +197,4 @@ def get_generator(name: str, description: str) -> Generator:
 
     else:
 
-        raise GeneratorTypeNotFoundError()
+        raise GeneratorTypeNotFoundError(name)

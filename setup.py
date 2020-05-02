@@ -7,7 +7,7 @@ Query cmake-generators
 from setuptools import find_packages, setup
 
 setup(name='cmake-generators',
-      version='1.0.1',
+      version='1.0.7',
       packages=find_packages(),
       description='Query cmake-generators',
       long_description=open("./README.md", 'r').read(),
