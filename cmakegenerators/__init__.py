@@ -21,7 +21,7 @@ def cmake_help() -> str:
     """
 
     output_bytes = bytes(subprocess.run(["cmake", "--help"], 
-                         capture_output=True).stdout)
+                         stdout=subprocess.PIPE).stdout)
 
     return output_bytes.decode(sys.stdout.encoding)
 
